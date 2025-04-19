@@ -17,58 +17,129 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) => setState(() => _currentPage = index),
-                children: const [
-                  _WelcomePage(),
-                  _AvatarCreationPage(),
-                  _EquipmentSelectionPage(),
-                  _ExplorerCertificatePage(),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (_currentPage > 0)
-                    TextButton(
-                      onPressed: () => _pageController.previousPage(
-                        duration: 300.ms,
-                        curve: Curves.easeInOut,
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          // Arka plan animasyonu
+          Positioned.fill(
+            child: FutureBuilder<LottieComposition>(
+              future: AssetLottie('assets/animations/onboarding.json').load(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      'Animasyon yüklenemedi: ${snapshot.error}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  );
+                }
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  );
+                }
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Lottie(
+                      composition: snapshot.data,
+                      fit: BoxFit.fill,
+                      width: constraints.maxWidth,
+                      height: constraints.maxHeight,
+                      repeat: true,
+                      options: LottieOptions(
+                        enableMergePaths: true,
                       ),
-                      child: const Text('Geri'),
-                    )
-                  else
-                    const SizedBox.shrink(),
-                  TextButton(
-                    onPressed: () {
-                      if (_currentPage < 3) {
-                        _pageController.nextPage(
-                          duration: 300.ms,
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const GameScreen(),
-                          ),
-                        );
-                      }
-                    },
-                    child: Text(_currentPage < 3 ? 'İleri' : 'Maceraya Başla'),
-                  ),
-                ],
-              ),
+                    );
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+          // İçerik
+          SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) =>
+                        setState(() => _currentPage = index),
+                    children: const [
+                      _WelcomePage(),
+                      _AvatarCreationPage(),
+                      _EquipmentSelectionPage(),
+                      _ExplorerCertificatePage(),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (_currentPage > 0)
+                        ElevatedButton.icon(
+                          onPressed: () => _pageController.previousPage(
+                            duration: 300.ms,
+                            curve: Curves.easeInOut,
+                          ),
+                          icon: const Icon(Icons.arrow_back_ios, size: 16),
+                          label: const Text('Geri'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white.withOpacity(0.9),
+                            foregroundColor: const Color(0xFF1A237E),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        )
+                      else
+                        const SizedBox.shrink(),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          if (_currentPage < 3) {
+                            _pageController.nextPage(
+                              duration: 300.ms,
+                              curve: Curves.easeInOut,
+                            );
+                          } else {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const GameScreen(),
+                              ),
+                            );
+                          }
+                        },
+                        icon: _currentPage < 3
+                            ? const Icon(Icons.arrow_forward_ios, size: 16)
+                            : const Icon(Icons.play_arrow, size: 20),
+                        label:
+                            Text(_currentPage < 3 ? 'İleri' : 'Maceraya Başla'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white.withOpacity(0.9),
+                          foregroundColor: const Color(0xFF1A237E),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -79,54 +150,51 @@ class _WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Arka plan animasyonu
-        Positioned.fill(
-          child: Lottie.asset(
-            'assets/animations/lotties/onboarding.lottie',
-            fit: BoxFit.cover,
-          ),
-        ),
-        // İçerik
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 32),
-              Text(
-                'Kaşif Akademisi\'ne\nHoş Geldin!',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 10.0,
-                      color: Colors.black.withOpacity(0.5),
-                      offset: const Offset(2.0, 2.0),
-                    ),
-                  ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 32),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 16.0,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
                 ),
-                textAlign: TextAlign.center,
-              ).animate().fadeIn().scale(),
-              const SizedBox(height: 16),
-              Text(
-                'Dünyayı keşfetmeye hazır mısın?',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 10.0,
-                      color: Colors.black.withOpacity(0.5),
-                      offset: const Offset(2.0, 2.0),
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.center,
-              ).animate().fadeIn(delay: 300.ms),
-            ],
+              ],
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'Kaşif Akademisi\'ne\nHoş Geldin!',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: const Color(0xFF1A237E),
+                        fontWeight: FontWeight.bold,
+                      ),
+                  textAlign: TextAlign.center,
+                ).animate().fadeIn().scale(),
+                const SizedBox(height: 16),
+                Text(
+                  'Dünyayı keşfetmeye hazır mısın?',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: const Color(0xFF0D47A1),
+                      ),
+                  textAlign: TextAlign.center,
+                ).animate().fadeIn(delay: 300.ms),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
