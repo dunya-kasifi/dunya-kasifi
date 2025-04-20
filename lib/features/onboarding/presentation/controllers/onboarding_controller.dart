@@ -140,6 +140,10 @@ class OnboardingController extends GetxController {
         isSignatureComplete.value;
   }
 
+  void updateSignatureStatus(bool isComplete) {
+    isSignatureComplete.value = isComplete;
+  }
+
   @override
   void onClose() {
     pageController.dispose();

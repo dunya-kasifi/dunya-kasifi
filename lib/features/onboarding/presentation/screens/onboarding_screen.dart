@@ -117,36 +117,56 @@ class OnboardingScreen extends StatelessWidget {
                             )
                           else
                             const SizedBox.shrink(),
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              if (controller.currentPage.value < 4) {
-                                controller.nextPage();
-                              } else {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => const GameScreen(),
-                                  ),
-                                );
-                              }
-                            },
-                            icon: controller.currentPage.value < 4
-                                ? const Icon(Icons.arrow_forward_ios, size: 16)
-                                : const Icon(Icons.play_arrow, size: 20),
-                            label: Text(controller.currentPage.value < 4
-                                ? 'İleri'
-                                : 'Maceraya Başla'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.9),
-                              foregroundColor: const Color(0xFF1A237E),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 12,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
+                          Obx(() {
+                            final isLastPage =
+                                controller.currentPage.value == 4;
+                            final isCertificateComplete =
+                                controller.isSignatureComplete.value;
+                            final canProceed = !isLastPage ||
+                                (isLastPage && isCertificateComplete);
+
+                            return controller.currentPage < 4
+                                ? ElevatedButton.icon(
+                                    onPressed: canProceed
+                                        ? () {
+                                            if (controller.currentPage.value <
+                                                4) {
+                                              controller.nextPage();
+                                            } else {
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const GameScreen(),
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        : null,
+                                    icon: controller.currentPage.value < 4
+                                        ? const Icon(Icons.arrow_forward_ios,
+                                            size: 16)
+                                        : const Icon(Icons.play_arrow,
+                                            size: 20),
+                                    label: Text(controller.currentPage.value < 4
+                                        ? 'İleri'
+                                        : 'Maceraya Başla'),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: canProceed
+                                          ? Colors.white.withOpacity(0.9)
+                                          : Colors.white.withOpacity(0.3),
+                                      foregroundColor: const Color(0xFF1A237E),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 12,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox();
+                          }),
                         ],
                       )),
                 ),
