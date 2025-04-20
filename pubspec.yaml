@@ -79,6 +79,7 @@ flutter:
     - assets/sounds/
     - assets/animations/lotties/
     - assets/images/avatars/
+    - assets/images/vehicles/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
