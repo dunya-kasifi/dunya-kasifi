@@ -164,8 +164,8 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ### Hilal Davas
 
-[İlayda Can](215541029@firat.edu.te)
+[Hilal Davas](215541029@firat.edu.tr)
 
 ### Doğukan Yaşar
 
-[İlayda Can](215541027@firat.edu.tr)
+[Doğukan Yaşar](215541027@firat.edu.tr)
