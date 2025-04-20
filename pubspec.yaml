@@ -49,6 +49,8 @@ dependencies:
   flutter_compass: ^0.8.0 # Pusula
   flutter_map: ^6.1.0 # Harita görünümü
   geolocator: ^11.0.0 # Konum servisleri
+  get: ^4.6.6
+  #arcore_flutter_plugin: ^0.0.10
 
 dev_dependencies:
   flutter_test:
