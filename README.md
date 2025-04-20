@@ -148,6 +148,10 @@ lib/
 
 Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
 
+## 📚 Proje Dokümanları
+
+Proje ile ilgili tüm dokümanlar `documents` klasörü altında bulunmaktadır. Dokümanları görüntülemek için ilgili klasöre gidip PDF formatındaki dosyaları açabilirsiniz.
+
 ## 📞 İletişim
 
 ### Mehmet Utku Meşe (Scrum Master)
