@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
+import '../controllers/onboarding_controller.dart';
 
-class EquipmentSelectionPage extends StatefulWidget {
+class EquipmentSelectionPage extends StatelessWidget {
   const EquipmentSelectionPage({super.key});
 
   @override
-  State<EquipmentSelectionPage> createState() => _EquipmentSelectionPageState();
-}
-
-class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
-  final List<bool> _selectedEquipment = List.generate(4, (index) => false);
-  final List<Color> _cardColors = [
-    const Color(0xFFFF6B6B), // Kırmızı
-    const Color(0xFF4ECDC4), // Turkuaz
-    const Color(0xFFFFD166), // Sarı
-    const Color(0xFF7E4AE5), // Mor
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    final OnboardingController controller = Get.find<OnboardingController>();
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Seçilen avatar
+          Obx(() => Container(
+                width: 100,
+                height: 100,
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.2),
+                    width: 2,
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset(
+                    'assets/images/avatars/${controller.selectedAvatarIndex.value + 1}.jpeg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ).animate().fadeIn().scale()),
           Text(
             'Keşif Ekipmanlarını Seç',
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -61,44 +73,29 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
                       childAspectRatio: 1.2,
-                      children: [
-                        _EquipmentCard(
-                          title: 'Sihirli Pusula',
-                          description: 'Her zaman doğru yönü gösterir!',
-                          icon: Icons.explore,
-                          isSelected: _selectedEquipment[0],
-                          color: _cardColors[0],
-                          onSelect: () => setState(() =>
-                              _selectedEquipment[0] = !_selectedEquipment[0]),
-                        ).animate().fadeIn(delay: 200.ms).slideX(),
-                        _EquipmentCard(
-                          title: 'Not Defteri',
-                          description: 'Keşiflerini kaydetmek için!',
-                          icon: Icons.book,
-                          isSelected: _selectedEquipment[1],
-                          color: _cardColors[1],
-                          onSelect: () => setState(() =>
-                              _selectedEquipment[1] = !_selectedEquipment[1]),
-                        ).animate().fadeIn(delay: 400.ms).slideX(),
-                        _EquipmentCard(
-                          title: 'Fotoğraf Makinesi',
-                          description: 'Anılarını ölümsüzleştir!',
-                          icon: Icons.camera_alt,
-                          isSelected: _selectedEquipment[2],
-                          color: _cardColors[2],
-                          onSelect: () => setState(() =>
-                              _selectedEquipment[2] = !_selectedEquipment[2]),
-                        ).animate().fadeIn(delay: 600.ms).slideX(),
-                        _EquipmentCard(
-                          title: 'Sanal Dürbün',
-                          description: 'Uzakları yakın et!',
-                          icon: Icons.remove_red_eye,
-                          isSelected: _selectedEquipment[3],
-                          color: _cardColors[3],
-                          onSelect: () => setState(() =>
-                              _selectedEquipment[3] = !_selectedEquipment[3]),
-                        ).animate().fadeIn(delay: 800.ms).slideX(),
-                      ],
+                      children: List.generate(4, (index) {
+                        return Obx(() => _EquipmentCard(
+                              title: controller.equipmentNames[index],
+                              description: [
+                                'Her zaman doğru yönü gösterir!',
+                                'Keşiflerini kaydetmek için!',
+                                'Anılarını ölümsüzleştir!',
+                                'Uzakları yakın et!'
+                              ][index],
+                              icon: [
+                                Icons.explore,
+                                Icons.book,
+                                Icons.camera_alt,
+                                Icons.remove_red_eye,
+                              ][index],
+                              isSelected: controller.selectedEquipment[index],
+                              color: controller.equipmentColors[index],
+                              onSelect: () => controller.toggleEquipment(index),
+                            )
+                                .animate()
+                                .fadeIn(delay: (200 + index * 100).ms)
+                                .slideX());
+                      }),
                     ),
                   ),
                   const SizedBox(width: 32),
@@ -108,14 +105,6 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
                     height: 400,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      /* gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          const Color(0xFF91EDFF).withOpacity(0.9),
-                          const Color(0xFFB8F0FF).withOpacity(0.9),
-                        ],
-                      ), */
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
@@ -126,7 +115,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
                         ),
                       ],
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withOpacity(0.3),
                         width: 2,
                       ),
                     ),
@@ -146,10 +135,12 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
                           ),
                           child: Text(
                             'Seçilen Ekipmanlar',
-                            style: TextStyle(
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
                               color: const Color(0xFF1A237E),
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
                               shadows: [
                                 Shadow(
                                   blurRadius: 2.0,
@@ -162,96 +153,73 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
                         ).animate().fadeIn().scale(),
                         const SizedBox(height: 16),
                         Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: List.generate(4, (index) {
-                                if (_selectedEquipment[index]) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(bottom: 12),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 12),
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            _cardColors[index].withOpacity(0.2),
-                                            _cardColors[index].withOpacity(0.1),
-                                          ],
-                                        ),
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          color: _cardColors[index],
-                                          width: 2,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: _cardColors[index]
+                          child: Obx(() => SingleChildScrollView(
+                                child: Column(
+                                  children: List.generate(4, (index) {
+                                    if (controller.selectedEquipment[index]) {
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12, vertical: 8),
+                                          decoration: BoxDecoration(
+                                            color: controller
+                                                .equipmentColors[index]
                                                 .withOpacity(0.2),
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 2),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              color: controller
+                                                  .equipmentColors[index],
+                                              width: 2,
+                                            ),
                                           ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(6),
-                                            decoration: BoxDecoration(
-                                              color: _cardColors[index]
-                                                  .withOpacity(0.1),
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: _cardColors[index],
-                                                width: 2,
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(6),
+                                                decoration: BoxDecoration(
+                                                  color: controller
+                                                      .equipmentColors[index]
+                                                      .withOpacity(0.1),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  [
+                                                    Icons.explore,
+                                                    Icons.book,
+                                                    Icons.camera_alt,
+                                                    Icons.remove_red_eye,
+                                                  ][index],
+                                                  color: controller
+                                                      .equipmentColors[index],
+                                                  size: 18,
+                                                ),
                                               ),
-                                            ),
-                                            child: Icon(
-                                              [
-                                                Icons.explore,
-                                                Icons.book,
-                                                Icons.camera_alt,
-                                                Icons.remove_red_eye,
-                                              ][index],
-                                              color: _cardColors[index],
-                                              size: 18,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Expanded(
-                                            child: Text(
-                                              [
-                                                'Sihirli Pusula',
-                                                'Not Defteri',
-                                                'Fotoğraf Makinesi',
-                                                'Sanal Dürbün',
-                                              ][index],
-                                              style: TextStyle(
-                                                color: _cardColors[index],
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                shadows: [
-                                                  Shadow(
-                                                    blurRadius: 2.0,
-                                                    color: Colors.white
-                                                        .withOpacity(0.5),
-                                                    offset:
-                                                        const Offset(1.0, 1.0),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  controller
+                                                      .equipmentNames[index],
+                                                  style: TextStyle(
+                                                    color: controller
+                                                        .equipmentColors[index],
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ).animate().fadeIn().scale(),
-                                  );
-                                }
-                                return const SizedBox.shrink();
-                              }),
-                            ),
-                          ),
+                                        ).animate().fadeIn().scale(),
+                                      );
+                                    }
+                                    return const SizedBox.shrink();
+                                  }),
+                                ),
+                              )),
                         ),
                       ],
                     ),
