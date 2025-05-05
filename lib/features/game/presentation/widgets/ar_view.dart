@@ -1,49 +1,46 @@
-import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vector_math/vector_math_64.dart' hide Colors;
 
-class ARView extends ConsumerStatefulWidget {
+class ARView extends StatelessWidget {
   const ARView({super.key});
 
   @override
-  ConsumerState<ARView> createState() => _ARViewState();
-}
-
-class _ARViewState extends ConsumerState<ARView> {
-  ARKitController? arController;
-
-  @override
-  void dispose() {
-    arController?.dispose();
-    super.dispose();
-  }
-
-  void _onARKitViewCreated(ARKitController controller) {
-    arController = controller;
-    _addSphere(controller);
-  }
-
-  void _addSphere(ARKitController controller) {
-    final material = ARKitMaterial(
-      diffuse: ARKitMaterialProperty.color(Colors.blue),
-    );
-    final sphere = ARKitSphere(
-      materials: [material],
-      radius: 0.1,
-    );
-    final node = ARKitNode(
-      geometry: sphere,
-      position: Vector3(0, 0, -0.5),
-    );
-    controller.add(node);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ARKitSceneView(
-      onARKitViewCreated: _onARKitViewCreated,
-      enableTapRecognizer: true,
+    return Stack(
+      children: [
+        Container(
+          color: Colors.black.withOpacity(0.5),
+        ),
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: 80, // Üst bar için boşluk
+              bottom: 112, // Alt bar için boşluk (80 + 32)
+              left: 16,
+              right: 16,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.2),
+                  width: 2,
+                ),
+              ),
+              child: const Center(
+                child: Text(
+                  'AR View',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

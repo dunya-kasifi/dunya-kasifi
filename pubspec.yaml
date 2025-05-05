@@ -37,7 +37,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   arkit_plugin: ^1.1.2
   google_fonts: ^6.1.0 # Modern yazı tipleri
-  flutter_riverpod: ^2.5.1 # State management
   go_router: ^13.2.0 # Navigation
   lottie: ^3.1.0 # Animasyonlar
   flutter_svg: ^2.0.10+1 # SVG desteği
