@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:get/get.dart';
 import '../../../game/presentation/screens/game_screen.dart';
 import '../controllers/onboarding_controller.dart';
@@ -21,102 +20,100 @@ class OnboardingScreen extends StatelessWidget {
       body: Stack(
         children: [
           // Arka plan animasyonu sadece WelcomePage için
-          Obx(() => controller.currentPage.value == 0
-              ? Positioned.fill(
-                  child: FutureBuilder<LottieComposition>(
-                    future:
-                        AssetLottie('assets/animations/onboarding.json').load(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text(
-                            'Animasyon yüklenemedi: ${snapshot.error}',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }
-                      if (!snapshot.hasData) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        );
-                      }
-                      return LayoutBuilder(
-                        builder: (context, constraints) {
-                          return Lottie(
-                            composition: snapshot.data,
-                            fit: BoxFit.fill,
-                            width: constraints.maxWidth,
-                            height: constraints.maxHeight,
-                            repeat: true,
-                            options: LottieOptions(
-                              enableMergePaths: true,
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                )
-              : Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          const Color(0xFF1A237E).withOpacity(0.8),
-                          const Color(0xFF0D47A1).withOpacity(0.8),
-                          const Color(0xFF1565C0).withOpacity(0.8),
-                        ],
-                        stops: const [0.0, 0.5, 1.0],
-                      ),
-                    ),
-                  ),
-                )),
-          // İçerik
-          SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: controller.pageController,
-                    onPageChanged: controller.updatePage,
-                    children: const [
-                      WelcomePage(),
-                      AvatarCreationPage(),
-                      EquipmentSelectionPage(),
-                      FavoriteVehiclePage(),
-                      ExplorerCertificatePage(),
-                    ],
-                  ),
+          // Obx(() => controller.currentPage.value == 0
+          //     ? Positioned.fill(
+          //         child: FutureBuilder<LottieComposition>(
+          //           future:
+          //               AssetLottie('assets/animations/onboarding.json').load(),
+          //           builder: (context, snapshot) {
+          //             if (snapshot.hasError) {
+          //               return Center(
+          //                 child: Text(
+          //                   'Animasyon yüklenemedi: ${snapshot.error}',
+          //                   style: const TextStyle(color: Colors.white),
+          //                 ),
+          //               );
+          //             }
+          //             if (!snapshot.hasData) {
+          //               return const Center(
+          //                 child: CircularProgressIndicator(
+          //                   color: Colors.white,
+          //                 ),
+          //               );
+          //             }
+          //             return LayoutBuilder(
+          //               builder: (context, constraints) {
+          //                 return Lottie(
+          //                   composition: snapshot.data,
+          //                   fit: BoxFit.fill,
+          //                   width: constraints.maxWidth,
+          //                   height: constraints.maxHeight,
+          //                   repeat: true,
+          //                   options: LottieOptions(
+          //                     enableMergePaths: true,
+          //                   ),
+          //                 );
+          //               },
+          //             );
+          //           },
+          //         ),
+          //       )
+          //    :
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    const Color(0xFF1A237E).withOpacity(0.8),
+                    const Color(0xFF0D47A1).withOpacity(0.8),
+                    const Color(0xFF1565C0).withOpacity(0.8),
+                  ],
+                  stops: const [0.0, 0.5, 1.0],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Obx(() => Row(
+              ),
+            ),
+          ),
+          // İçerik
+          Column(
+            children: [
+              Expanded(
+                child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: controller.pageController,
+                  onPageChanged: controller.updatePage,
+                  children: [
+                    WelcomePage(),
+                    AvatarCreationPage(),
+                    EquipmentSelectionPage(),
+                    FavoriteVehiclePage(),
+                    ExplorerCertificatePage(),
+                  ],
+                ),
+              ),
+              Obx(() => controller.currentPage.value > 0
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          if (controller.currentPage.value > 0)
-                            ElevatedButton.icon(
-                              onPressed: controller.previousPage,
-                              icon: const Icon(Icons.arrow_back_ios, size: 16),
-                              label: const Text('Geri'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white.withOpacity(0.9),
-                                foregroundColor: const Color(0xFF1A237E),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 12,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
+                          ElevatedButton.icon(
+                            onPressed: controller.previousPage,
+                            icon: const Icon(Icons.arrow_back_ios, size: 16),
+                            label: const Text('Geri'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.9),
+                              foregroundColor: const Color(0xFF1A237E),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 12,
                               ),
-                            )
-                          else
-                            const SizedBox.shrink(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
                           Obx(() {
                             final isLastPage =
                                 controller.currentPage.value == 4;
@@ -168,10 +165,10 @@ class OnboardingScreen extends StatelessWidget {
                                 : SizedBox();
                           }),
                         ],
-                      )),
-                ),
-              ],
-            ),
+                      ),
+                    )
+                  : const SizedBox.shrink()),
+            ],
           ),
         ],
       ),

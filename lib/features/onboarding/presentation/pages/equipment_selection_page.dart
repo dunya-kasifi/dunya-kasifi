@@ -10,225 +10,230 @@ class EquipmentSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final OnboardingController controller = Get.find<OnboardingController>();
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Seçilen avatar
-          Obx(() => Container(
-                width: 100,
-                height: 100,
-                margin: const EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.2),
-                    width: 2,
-                  ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/avatars/${controller.selectedAvatarIndex.value + 1}.jpeg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ).animate().fadeIn().scale()),
-          Text(
-            'Keşif Ekipmanlarını Seç',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              color: Colors.white,
-              shadows: [
-                Shadow(
-                  blurRadius: 10.0,
-                  color: Colors.black.withOpacity(0.5),
-                  offset: const Offset(2.0, 2.0),
-                ),
-              ],
-            ),
-          ).animate().fadeIn().scale(),
-          const SizedBox(height: 24),
-          Expanded(
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Sol taraf - Ekipmanlar
-                  Container(
-                    width: 400,
-                    height: 400,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.2),
-                        width: 2,
-                      ),
-                    ),
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      childAspectRatio: 1.2,
-                      children: List.generate(4, (index) {
-                        return Obx(() => _EquipmentCard(
-                              title: controller.equipmentNames[index],
-                              description: [
-                                'Her zaman doğru yönü gösterir!',
-                                'Keşiflerini kaydetmek için!',
-                                'Anılarını ölümsüzleştir!',
-                                'Uzakları yakın et!'
-                              ][index],
-                              icon: [
-                                Icons.explore,
-                                Icons.book,
-                                Icons.camera_alt,
-                                Icons.remove_red_eye,
-                              ][index],
-                              isSelected: controller.selectedEquipment[index],
-                              color: controller.equipmentColors[index],
-                              onSelect: () => controller.toggleEquipment(index),
-                            )
-                                .animate()
-                                .fadeIn(delay: (200 + index * 100).ms)
-                                .slideX());
-                      }),
+    return SafeArea(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Seçilen avatar
+            Obx(() => Container(
+                  width: 100,
+                  height: 100,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.2),
+                      width: 2,
                     ),
                   ),
-                  const SizedBox(width: 32),
-                  // Sağ taraf - Seçilen ekipmanların önizlemesi
-                  Container(
-                    width: 250,
-                    height: 400,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.3),
-                        width: 2,
-                      ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      'assets/images/avatars/${controller.selectedAvatarIndex.value + 1}.jpeg',
+                      fit: BoxFit.cover,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF1A237E).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: const Color(0xFF1A237E).withOpacity(0.3),
-                              width: 2,
-                            ),
-                          ),
-                          child: Text(
-                            'Seçilen Ekipmanlar',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                              color: const Color(0xFF1A237E),
-                              fontWeight: FontWeight.bold,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 2.0,
-                                  color: Colors.white.withOpacity(0.5),
-                                  offset: const Offset(1.0, 1.0),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ).animate().fadeIn().scale(),
-                        const SizedBox(height: 16),
-                        Expanded(
-                          child: Obx(() => SingleChildScrollView(
-                                child: Column(
-                                  children: List.generate(4, (index) {
-                                    if (controller.selectedEquipment[index]) {
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12, vertical: 8),
-                                          decoration: BoxDecoration(
-                                            color: controller
-                                                .equipmentColors[index]
-                                                .withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              color: controller
-                                                  .equipmentColors[index],
-                                              width: 2,
-                                            ),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(6),
-                                                decoration: BoxDecoration(
-                                                  color: controller
-                                                      .equipmentColors[index]
-                                                      .withOpacity(0.1),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Icon(
-                                                  [
-                                                    Icons.explore,
-                                                    Icons.book,
-                                                    Icons.camera_alt,
-                                                    Icons.remove_red_eye,
-                                                  ][index],
-                                                  color: controller
-                                                      .equipmentColors[index],
-                                                  size: 18,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Expanded(
-                                                child: Text(
-                                                  controller
-                                                      .equipmentNames[index],
-                                                  style: TextStyle(
-                                                    color: controller
-                                                        .equipmentColors[index],
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ).animate().fadeIn().scale(),
-                                      );
-                                    }
-                                    return const SizedBox.shrink();
-                                  }),
-                                ),
-                              )),
-                        ),
-                      ],
-                    ),
+                  ),
+                ).animate().fadeIn().scale()),
+            Text(
+              'Keşif Ekipmanlarını Seç',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.black.withOpacity(0.5),
+                    offset: const Offset(2.0, 2.0),
                   ),
                 ],
               ),
+            ).animate().fadeIn().scale(),
+            const SizedBox(height: 24),
+            Expanded(
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Sol taraf - Ekipmanlar
+                    Container(
+                      width: 400,
+                      height: 400,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.2),
+                          width: 2,
+                        ),
+                      ),
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 16,
+                        childAspectRatio: 1.2,
+                        children: List.generate(4, (index) {
+                          return Obx(() => _EquipmentCard(
+                                title: controller.equipmentNames[index],
+                                description: [
+                                  'Her zaman doğru yönü gösterir!',
+                                  'Keşiflerini kaydetmek için!',
+                                  'Anılarını ölümsüzleştir!',
+                                  'Uzakları yakın et!'
+                                ][index],
+                                icon: [
+                                  Icons.explore,
+                                  Icons.book,
+                                  Icons.camera_alt,
+                                  Icons.remove_red_eye,
+                                ][index],
+                                isSelected: controller.selectedEquipment[index],
+                                color: controller.equipmentColors[index],
+                                onSelect: () =>
+                                    controller.toggleEquipment(index),
+                              )
+                                  .animate()
+                                  .fadeIn(delay: (200 + index * 100).ms)
+                                  .slideX());
+                        }),
+                      ),
+                    ),
+                    const SizedBox(width: 32),
+                    // Sağ taraf - Seçilen ekipmanların önizlemesi
+                    Container(
+                      width: 250,
+                      height: 400,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 2,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1A237E).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: const Color(0xFF1A237E).withOpacity(0.3),
+                                width: 2,
+                              ),
+                            ),
+                            child: Text(
+                              'Seçilen Ekipmanlar',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                color: const Color(0xFF1A237E),
+                                fontWeight: FontWeight.bold,
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 2.0,
+                                    color: Colors.white.withOpacity(0.5),
+                                    offset: const Offset(1.0, 1.0),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ).animate().fadeIn().scale(),
+                          const SizedBox(height: 16),
+                          Expanded(
+                            child: Obx(() => SingleChildScrollView(
+                                  child: Column(
+                                    children: List.generate(4, (index) {
+                                      if (controller.selectedEquipment[index]) {
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 8),
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 12, vertical: 8),
+                                            decoration: BoxDecoration(
+                                              color: controller
+                                                  .equipmentColors[index]
+                                                  .withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              border: Border.all(
+                                                color: controller
+                                                    .equipmentColors[index],
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(6),
+                                                  decoration: BoxDecoration(
+                                                    color: controller
+                                                        .equipmentColors[index]
+                                                        .withOpacity(0.1),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Icon(
+                                                    [
+                                                      Icons.explore,
+                                                      Icons.book,
+                                                      Icons.camera_alt,
+                                                      Icons.remove_red_eye,
+                                                    ][index],
+                                                    color: controller
+                                                        .equipmentColors[index],
+                                                    size: 18,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 8),
+                                                Expanded(
+                                                  child: Text(
+                                                    controller
+                                                        .equipmentNames[index],
+                                                    style: TextStyle(
+                                                      color: controller
+                                                              .equipmentColors[
+                                                          index],
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ).animate().fadeIn().scale(),
+                                        );
+                                      }
+                                      return const SizedBox.shrink();
+                                    }),
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
