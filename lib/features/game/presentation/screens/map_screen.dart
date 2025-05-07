@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import '../controllers/route_controller.dart';
+import '../../../mini_games/presentation/screens/cloud_painting_screen.dart';
 
 class MapScreen extends GetView<RouteController> {
   const MapScreen({super.key});
@@ -83,7 +84,9 @@ class MapScreen extends GetView<RouteController> {
                 point.miniGame.description,
                 Icons.games,
                 () {
-                  // TODO: Navigate to mini game
+                  if (point.miniGame.name.contains('Bulut')) {
+                    Get.to(() => const CloudPaintingScreen());
+                  }
                 },
               ),
               const SizedBox(height: 16.0),
