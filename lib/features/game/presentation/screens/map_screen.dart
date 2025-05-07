@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import '../controllers/route_controller.dart';
 import '../../../mini_games/presentation/screens/cloud_painting_screen.dart';
+import '../../../mini_games/presentation/screens/weather_prediction_screen.dart';
 
 class MapScreen extends GetView<RouteController> {
   const MapScreen({super.key});
@@ -86,6 +87,8 @@ class MapScreen extends GetView<RouteController> {
                 () {
                   if (point.miniGame.name.contains('Bulut')) {
                     Get.to(() => const CloudPaintingScreen());
+                  } else if (point.miniGame.name.contains('Hava')) {
+                    Get.to(() => const WeatherPredictionScreen());
                   }
                 },
               ),
