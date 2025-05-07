@@ -1,6 +1,7 @@
 import 'package:dunya_kasifi/features/game/presentation/bindings/game_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'core/app_colors.dart';
 import 'features/onboarding/presentation/controllers/onboarding_controller.dart';
 import 'features/onboarding/presentation/screens/onboarding_screen.dart';
 
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Dünya Kaşifi',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1A237E)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primaryColor,
+          primary: AppColors.primaryColor,
+          secondary: AppColors.secondaryColor,
+        ),
         useMaterial3: true,
       ),
       initialBinding: GameBinding(),

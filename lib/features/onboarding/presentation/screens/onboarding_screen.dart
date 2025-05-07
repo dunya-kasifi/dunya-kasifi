@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../core/app_colors.dart';
 import '../../../game/presentation/screens/game_screen.dart';
 import '../controllers/onboarding_controller.dart';
 import '../pages/welcome_page.dart';
@@ -66,9 +67,9 @@ class OnboardingScreen extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    const Color(0xFF1A237E).withOpacity(0.8),
-                    const Color(0xFF0D47A1).withOpacity(0.8),
-                    const Color(0xFF1565C0).withOpacity(0.8),
+                    AppColors.primaryColor.withOpacity(0.8),
+                    AppColors.primaryColor.withOpacity(0.8),
+                    AppColors.quinaryColor.withOpacity(0.8),
                   ],
                   stops: const [0.0, 0.5, 1.0],
                 ),
@@ -103,8 +104,9 @@ class OnboardingScreen extends StatelessWidget {
                             icon: const Icon(Icons.arrow_back_ios, size: 16),
                             label: const Text('Geri'),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.9),
-                              foregroundColor: const Color(0xFF1A237E),
+                              backgroundColor:
+                                  AppColors.backgroundColor.withOpacity(0.9),
+                              foregroundColor: AppColors.primaryColor,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 20,
                                 vertical: 12,
@@ -150,9 +152,11 @@ class OnboardingScreen extends StatelessWidget {
                                         : 'Maceraya Başla'),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: canProceed
-                                          ? Colors.white.withOpacity(0.9)
-                                          : Colors.white.withOpacity(0.3),
-                                      foregroundColor: const Color(0xFF1A237E),
+                                          ? AppColors.backgroundColor
+                                              .withOpacity(0.9)
+                                          : AppColors.backgroundColor
+                                              .withOpacity(0.3),
+                                      foregroundColor: AppColors.primaryColor,
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 20,
                                         vertical: 12,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import '../../../../core/app_colors.dart';
 import '../widgets/ar_view.dart';
 import 'map_screen.dart';
 import '../controllers/game_controller.dart';
@@ -20,8 +21,8 @@ class GameScreen extends GetView<GameController> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  const Color(0xFF1A237E).withAlpha(230),
-                  const Color(0xFF0D47A1).withAlpha(230),
+                  AppColors.primaryColor.withAlpha(230),
+                  AppColors.secondaryColor.withAlpha(230),
                 ],
               ),
             ),
@@ -46,10 +47,10 @@ class GameScreen extends GetView<GameController> {
                 bottom: 16,
               ),
               decoration: BoxDecoration(
-                color: Colors.white.withAlpha(25),
+                color: AppColors.backgroundColor.withAlpha(25),
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.white.withAlpha(51),
+                    color: AppColors.backgroundColor.withAlpha(51),
                     width: 1,
                   ),
                 ),
@@ -86,15 +87,15 @@ class GameScreen extends GetView<GameController> {
             child: Container(
               height: 90,
               decoration: BoxDecoration(
-                color: Colors.white.withAlpha(25),
+                color: AppColors.backgroundColor.withAlpha(25),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: Colors.white.withAlpha(51),
+                  color: AppColors.backgroundColor.withAlpha(51),
                   width: 2,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withAlpha(51),
+                    color: AppColors.textColor.withAlpha(51),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -159,10 +160,10 @@ class _TopBarButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: Colors.white.withAlpha(25),
+          color: AppColors.backgroundColor.withAlpha(25),
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: Colors.white.withAlpha(51),
+            color: AppColors.backgroundColor.withAlpha(51),
             width: 2,
           ),
         ),
@@ -171,14 +172,14 @@ class _TopBarButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: AppColors.backgroundColor,
               size: 20,
             ),
             const SizedBox(width: 8),
             Text(
               label,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: AppColors.backgroundColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -214,24 +215,24 @@ class _EquipmentItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withAlpha(51),
+                color: AppColors.backgroundColor.withAlpha(51),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Colors.white.withAlpha(77),
+                  color: AppColors.backgroundColor.withAlpha(77),
                   width: 2,
                 ),
               ),
               child: Icon(
                 icon,
-                color: Colors.white,
+                color: AppColors.backgroundColor,
                 size: 24,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               label,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: AppColors.backgroundColor,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,7 +1,8 @@
+import 'package:dunya_kasifi/features/onboarding/presentation/controllers/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import '../controllers/onboarding_controller.dart';
+import '../../../../core/app_colors.dart';
 
 class AvatarCreationPage extends StatelessWidget {
   const AvatarCreationPage({super.key});
@@ -17,11 +18,11 @@ class AvatarCreationPage extends StatelessWidget {
           Text(
             'Karakterini Seç',
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              color: Colors.white,
+              color: AppColors.backgroundColor,
               shadows: [
                 Shadow(
                   blurRadius: 10.0,
-                  color: Colors.black.withOpacity(0.5),
+                  color: AppColors.textColor.withOpacity(0.5),
                   offset: const Offset(2.0, 2.0),
                 ),
               ],
@@ -33,17 +34,17 @@ class AvatarCreationPage extends StatelessWidget {
                 width: 200,
                 height: 200,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+                  color: AppColors.backgroundColor.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(100),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: AppColors.textColor.withOpacity(0.2),
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
                   ],
                   border: Border.all(
-                    color: const Color(0xFF1A237E),
+                    color: AppColors.primaryColor,
                     width: 3,
                   ),
                 ),
@@ -65,10 +66,10 @@ class AvatarCreationPage extends StatelessWidget {
               vertical: 12,
             ),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: AppColors.backgroundColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: Colors.white.withOpacity(0.2),
+                color: AppColors.backgroundColor.withOpacity(0.2),
                 width: 2,
               ),
             ),
@@ -86,19 +87,19 @@ class AvatarCreationPage extends StatelessWidget {
                       height: 80,
                       margin: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
+                        color: AppColors.backgroundColor.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(40),
                         border: Border.all(
                           color: isSelected
-                              ? const Color(0xFF1A237E)
+                              ? AppColors.primaryColor
                               : Colors.transparent,
                           width: 3,
                         ),
                         boxShadow: [
                           BoxShadow(
                             color: isSelected
-                                ? const Color(0xFF1A237E).withOpacity(0.3)
-                                : Colors.black.withOpacity(0.2),
+                                ? AppColors.primaryColor.withOpacity(0.3)
+                                : AppColors.textColor.withOpacity(0.2),
                             blurRadius: 5,
                             offset: const Offset(0, 3),
                           ),
@@ -123,25 +124,23 @@ class AvatarCreationPage extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color:
-                      const Color.fromARGB(255, 255, 255, 255).withOpacity(0.1),
+                  color: AppColors.backgroundColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: const Color.fromARGB(255, 255, 255, 255)
-                        .withOpacity(0.3),
+                    color: AppColors.backgroundColor.withOpacity(0.3),
                     width: 2,
                   ),
                 ),
                 child: Text(
                   controller.avatarNames[controller.selectedAvatarIndex.value],
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.backgroundColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     shadows: [
                       Shadow(
                         blurRadius: 2.0,
-                        color: Colors.white.withOpacity(0.5),
+                        color: AppColors.backgroundColor.withOpacity(0.5),
                         offset: const Offset(1.0, 1.0),
                       ),
                     ],

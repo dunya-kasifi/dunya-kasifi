@@ -2,6 +2,7 @@ import 'package:dunya_kasifi/features/onboarding/presentation/controllers/onboar
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import '../../../../core/app_colors.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({super.key});
@@ -16,8 +17,8 @@ class WelcomePage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            const Color(0xFF1A237E).withOpacity(0.9),
-            const Color(0xFF0D47A1).withOpacity(0.9),
+            AppColors.primaryColor.withOpacity(0.9),
+            AppColors.secondaryColor.withOpacity(0.9),
           ],
         ),
       ),
@@ -32,7 +33,7 @@ class WelcomePage extends StatelessWidget {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.1),
+                color: AppColors.backgroundColor.withOpacity(0.1),
               ),
             ),
           )
@@ -62,7 +63,7 @@ class WelcomePage extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.1),
+                color: AppColors.backgroundColor.withOpacity(0.1),
               ),
             ),
           )
@@ -96,26 +97,24 @@ class WelcomePage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.backgroundColor,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: AppColors.textColor.withOpacity(0.2),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.explore,
                       size: 60,
-                      color: Color(0xFF1A237E),
+                      color: AppColors.primaryColor,
                     ),
                   )
                       .animate()
-                      .scale(duration: const Duration(milliseconds: 600))
-                      .then()
-                      .shake(duration: const Duration(milliseconds: 400)),
+                      .fadeIn(duration: const Duration(milliseconds: 600)),
 
                   const SizedBox(height: 40),
 
@@ -123,15 +122,14 @@ class WelcomePage extends StatelessWidget {
                   Text(
                     'Kaşif Akademisi\'ne\nHoş Geldin!',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Colors.white,
+                          color: AppColors.backgroundColor,
                           fontWeight: FontWeight.bold,
                           height: 1.2,
                         ),
                     textAlign: TextAlign.center,
                   )
                       .animate()
-                      .fadeIn(delay: const Duration(milliseconds: 200))
-                      .slideY(begin: 0.3, end: 0),
+                      .fadeIn(duration: const Duration(milliseconds: 600)),
 
                   const SizedBox(height: 16),
 
@@ -139,14 +137,13 @@ class WelcomePage extends StatelessWidget {
                   Text(
                     'Dünyayı keşfetmeye hazır mısın?',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.white.withOpacity(0.9),
+                          color: AppColors.backgroundColor.withOpacity(0.9),
                           height: 1.5,
                         ),
                     textAlign: TextAlign.center,
                   )
                       .animate()
-                      .fadeIn(delay: const Duration(milliseconds: 400))
-                      .slideY(begin: 0.3, end: 0),
+                      .fadeIn(duration: const Duration(milliseconds: 600)),
 
                   const SizedBox(height: 48),
 
@@ -156,8 +153,8 @@ class WelcomePage extends StatelessWidget {
                       controller.nextPage();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF1A237E),
+                      backgroundColor: AppColors.backgroundColor,
+                      foregroundColor: AppColors.primaryColor,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 32,
                         vertical: 16,
@@ -175,9 +172,22 @@ class WelcomePage extends StatelessWidget {
                       ),
                     ),
                   )
-                      .animate()
-                      .fadeIn(delay: const Duration(milliseconds: 600))
-                      .slideY(begin: 0.3, end: 0),
+                      .animate(
+                        onPlay: (controller) => controller.repeat(),
+                      )
+                      .fadeIn(duration: const Duration(milliseconds: 600))
+                      .then()
+                      .scale(
+                        begin: const Offset(1, 1),
+                        end: const Offset(1.1, 1.1),
+                        duration: const Duration(seconds: 1),
+                      )
+                      .then()
+                      .scale(
+                        begin: const Offset(1.1, 1.1),
+                        end: const Offset(1, 1),
+                        duration: const Duration(seconds: 1),
+                      ),
                 ],
               ),
             ),

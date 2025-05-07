@@ -1,7 +1,8 @@
+import 'package:dunya_kasifi/features/onboarding/presentation/controllers/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import '../controllers/onboarding_controller.dart';
+import '../../../../core/app_colors.dart';
 
 class EquipmentSelectionPage extends StatelessWidget {
   const EquipmentSelectionPage({super.key});
@@ -21,10 +22,10 @@ class EquipmentSelectionPage extends StatelessWidget {
                   height: 100,
                   margin: const EdgeInsets.only(bottom: 20),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
+                    color: AppColors.backgroundColor.withOpacity(0.1),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.2),
+                      color: AppColors.backgroundColor.withOpacity(0.2),
                       width: 2,
                     ),
                   ),
@@ -39,11 +40,11 @@ class EquipmentSelectionPage extends StatelessWidget {
             Text(
               'Keşif Ekipmanlarını Seç',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.white,
+                color: AppColors.backgroundColor,
                 shadows: [
                   Shadow(
                     blurRadius: 10.0,
-                    color: Colors.black.withOpacity(0.5),
+                    color: AppColors.textColor.withOpacity(0.5),
                     offset: const Offset(2.0, 2.0),
                   ),
                 ],
@@ -62,10 +63,10 @@ class EquipmentSelectionPage extends StatelessWidget {
                       height: 400,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: AppColors.backgroundColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
+                          color: AppColors.backgroundColor.withOpacity(0.2),
                           width: 2,
                         ),
                       ),
@@ -107,17 +108,17 @@ class EquipmentSelectionPage extends StatelessWidget {
                       height: 400,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.backgroundColor,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: AppColors.textColor.withOpacity(0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           ),
                         ],
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
+                          color: AppColors.backgroundColor.withOpacity(0.3),
                           width: 2,
                         ),
                       ),
@@ -128,10 +129,10 @@ class EquipmentSelectionPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1A237E).withOpacity(0.1),
+                              color: AppColors.primaryColor.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(15),
                               border: Border.all(
-                                color: const Color(0xFF1A237E).withOpacity(0.3),
+                                color: AppColors.primaryColor.withOpacity(0.3),
                                 width: 2,
                               ),
                             ),
@@ -141,12 +142,13 @@ class EquipmentSelectionPage extends StatelessWidget {
                                   .textTheme
                                   .titleMedium
                                   ?.copyWith(
-                                color: const Color(0xFF1A237E),
+                                color: AppColors.primaryColor,
                                 fontWeight: FontWeight.bold,
                                 shadows: [
                                   Shadow(
                                     blurRadius: 2.0,
-                                    color: Colors.white.withOpacity(0.5),
+                                    color: AppColors.backgroundColor
+                                        .withOpacity(0.5),
                                     offset: const Offset(1.0, 1.0),
                                   ),
                                 ],
@@ -265,9 +267,10 @@ class _EquipmentCard extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: isSelected
-                ? [color, color.withOpacity(0.8)]
-                : [Colors.white, Colors.white.withOpacity(0.9)],
+            colors: [
+              AppColors.primaryColor.withOpacity(0.9),
+              AppColors.secondaryColor.withOpacity(0.9),
+            ],
           ),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
@@ -278,7 +281,7 @@ class _EquipmentCard extends StatelessWidget {
             ),
           ],
           border: Border.all(
-            color: isSelected ? color : Colors.grey.withOpacity(0.3),
+            color: isSelected ? color : AppColors.textColor.withOpacity(0.3),
             width: 2,
           ),
         ),
@@ -288,7 +291,9 @@ class _EquipmentCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: isSelected ? Colors.white : color.withOpacity(0.1),
+                color: isSelected
+                    ? AppColors.backgroundColor
+                    : color.withOpacity(0.1),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -308,14 +313,14 @@ class _EquipmentCard extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: isSelected ? Colors.white : color,
+                color: isSelected ? AppColors.backgroundColor : color,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
                 shadows: isSelected
                     ? [
                         Shadow(
                           blurRadius: 2.0,
-                          color: Colors.black.withOpacity(0.3),
+                          color: AppColors.textColor.withOpacity(0.3),
                           offset: const Offset(1.0, 1.0),
                         ),
                       ]
@@ -328,14 +333,14 @@ class _EquipmentCard extends StatelessWidget {
               description,
               style: TextStyle(
                 color: isSelected
-                    ? Colors.white.withOpacity(0.9)
+                    ? AppColors.backgroundColor.withOpacity(0.9)
                     : color.withOpacity(0.7),
                 fontSize: 12,
                 shadows: isSelected
                     ? [
                         Shadow(
                           blurRadius: 2.0,
-                          color: Colors.black.withOpacity(0.2),
+                          color: AppColors.textColor.withOpacity(0.2),
                           offset: const Offset(1.0, 1.0),
                         ),
                       ]
