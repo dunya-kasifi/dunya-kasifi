@@ -149,16 +149,23 @@ class MapScreen extends GetView<RouteController> {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(12.0),
+              padding: title == 'Mini Oyun'
+                  ? const EdgeInsets.all(0.0)
+                  : const EdgeInsets.all(12.0),
               decoration: BoxDecoration(
                 color: AppColors.errorColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: Icon(
-                icon,
-                color: AppColors.errorColor,
-                size: 24,
-              ),
+              child: title == 'Mini Oyun'
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: _getGameIcon(subtitle),
+                    )
+                  : Icon(
+                      icon,
+                      color: AppColors.errorColor,
+                      size: 24,
+                    ),
             ),
             const SizedBox(width: 16.0),
             Expanded(
@@ -201,6 +208,32 @@ class MapScreen extends GetView<RouteController> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _getGameIcon(String gameName) {
+    String iconPath;
+    if (gameName.contains('Matematik')) {
+      iconPath = 'assets/images/game_icons/math.jpeg';
+    } else if (gameName.contains('Hava')) {
+      iconPath = 'assets/images/game_icons/weather.jpeg';
+    } else if (gameName.contains('Bulut')) {
+      iconPath = 'assets/images/game_icons/cloude.jpeg';
+    } else if (gameName.contains('Telaffuz')) {
+      iconPath = 'assets/images/game_icons/language.jpeg';
+    } else {
+      return Icon(
+        Icons.games,
+        color: AppColors.errorColor,
+        size: 24,
+      );
+    }
+
+    return Image.asset(
+      iconPath,
+      width: 50,
+      height: 50,
+      fit: BoxFit.cover,
     );
   }
 

@@ -82,6 +82,8 @@ flutter:
     - assets/sounds/
     - assets/images/avatars/
     - assets/images/vehicles/
+    - assets/images/game_icons/
+    - assets/images/cities/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
