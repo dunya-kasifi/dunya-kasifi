@@ -2,6 +2,7 @@ import 'package:dunya_kasifi/features/onboarding/presentation/controllers/onboar
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../core/app_colors.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -16,9 +17,10 @@ class WelcomePage extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
+          stops: const [0.2, 1],
           colors: [
             AppColors.primaryColor.withOpacity(0.9),
-            AppColors.secondaryColor.withOpacity(0.9),
+            AppColors.quinaryColor.withOpacity(0.9),
           ],
         ),
       ),
@@ -85,6 +87,17 @@ class WelcomePage extends StatelessWidget {
                 duration: const Duration(seconds: 4),
                 curve: Curves.easeInOut,
               ),
+
+          Positioned(
+            top: 50,
+            left: 50,
+            child: Lottie.asset(
+              'assets/animations/rocket.json',
+              width: 300,
+              height: 300,
+              fit: BoxFit.contain,
+            ),
+          ),
 
           // Main content
           Center(
@@ -175,18 +188,18 @@ class WelcomePage extends StatelessWidget {
                       .animate(
                         onPlay: (controller) => controller.repeat(),
                       )
-                      .fadeIn(duration: const Duration(milliseconds: 600))
-                      .then()
                       .scale(
                         begin: const Offset(1, 1),
                         end: const Offset(1.1, 1.1),
                         duration: const Duration(seconds: 1),
+                        curve: Curves.easeInOut,
                       )
                       .then()
                       .scale(
                         begin: const Offset(1.1, 1.1),
                         end: const Offset(1, 1),
                         duration: const Duration(seconds: 1),
+                        curve: Curves.easeInOut,
                       ),
                 ],
               ),

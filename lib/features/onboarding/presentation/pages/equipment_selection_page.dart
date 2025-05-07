@@ -264,15 +264,8 @@ class _EquipmentCard extends StatelessWidget {
       onTap: onSelect,
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors.primaryColor.withOpacity(0.9),
-              AppColors.secondaryColor.withOpacity(0.9),
-            ],
-          ),
           borderRadius: BorderRadius.circular(15),
+          color: isSelected ? color : AppColors.backgroundColor,
           boxShadow: [
             BoxShadow(
               color: color.withOpacity(0.3),
