@@ -88,7 +88,7 @@ class RouteController extends GetxController {
         location: const LatLng(41.0082, 28.9784), // İstanbul
         name: 'İstanbul Macerası',
         description: 'Boğazın sularında gizli hazineleri keşfet!',
-        imagePath: 'assets/images/game_image.jpeg',
+        imagePath: 'assets/images/cities/istanbul.jpeg',
         gameRoute: '/games/istanbul-adventure',
         miniGame: MiniGame(
           name: 'Gökyüzü Matematik Yarışı',
@@ -134,7 +134,7 @@ class RouteController extends GetxController {
         location: const LatLng(38.4192, 27.1287), // İzmir
         name: 'İzmir\'in Gizemleri',
         description: 'Ege\'nin incisinde kayıp eşyaları bul!',
-        imagePath: 'assets/images/game_image.jpeg',
+        imagePath: 'assets/images/cities/izmir.jpeg',
         gameRoute: '/games/izmir-mysteries',
         miniGame: MiniGame(
           name: 'Hava Durumu Tahmincisi',
@@ -179,7 +179,7 @@ class RouteController extends GetxController {
         location: const LatLng(37.8560, 27.8416), // Aydın
         name: 'Aydın\'ın Sırları',
         description: 'Antik kentlerde gizli mesajları çöz!',
-        imagePath: 'assets/images/game_image.jpeg',
+        imagePath: 'assets/images/cities/aydin.jpeg',
         gameRoute: '/games/aydin-secrets',
         miniGame: MiniGame(
           name: 'Bulut Boyama Oyunu',
@@ -224,7 +224,7 @@ class RouteController extends GetxController {
         location: const LatLng(37.7765, 29.0864), // Denizli
         name: 'Denizli\'nin Hazineleri',
         description: 'Pamukkale\'de efsanevi hazineleri bul!',
-        imagePath: 'assets/images/game_image.jpeg',
+        imagePath: 'assets/images/cities/denizli.jpeg',
         gameRoute: '/games/denizli-treasures',
         miniGame: MiniGame(
           name: 'Telaffuz Oyunu',
@@ -269,7 +269,7 @@ class RouteController extends GetxController {
         location: const LatLng(39.9334, 32.8597), // Ankara
         name: 'Ankara\'nın Efsaneleri',
         description: 'Başkentin tarihi yapılarını keşfet!',
-        imagePath: 'assets/images/game_image.jpeg',
+        imagePath: 'assets/images/cities/ankara.jpeg',
         gameRoute: '/games/ankara-legends',
         miniGame: MiniGame(
           name: 'Gökyüzü Matematik Yarışı',
@@ -314,7 +314,7 @@ class RouteController extends GetxController {
         location: const LatLng(38.6810, 39.2264), // Elazığ
         name: 'Elazığ\'ın Efsaneleri',
         description: 'Harput\'un efsanevi hazinelerini bul!',
-        imagePath: 'assets/images/game_image.jpeg',
+        imagePath: 'assets/images/cities/elazig.jpeg',
         gameRoute: '/games/elazig-legends',
         miniGame: MiniGame(
           name: 'Hava Durumu Tahmincisi',

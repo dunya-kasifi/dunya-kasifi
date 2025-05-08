@@ -106,7 +106,7 @@ class GameScreen extends GetView<GameController> {
                 children: [
                   _EquipmentItem(
                     icon: Icons.explore,
-                    label: 'Pusula',
+                    label: 'Pasaport',
                     onTap: () {
                       // TODO: Activate compass
                     },

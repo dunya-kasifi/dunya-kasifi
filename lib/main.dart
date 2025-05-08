@@ -1,5 +1,4 @@
 import 'package:dunya_kasifi/features/game/presentation/bindings/game_binding.dart';
-import 'package:dunya_kasifi/features/game/presentation/screens/game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'core/app_colors.dart';
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialBinding: GameBinding(),
-      home: const GameScreen(), //OnboardingScreen(),
+      home: const OnboardingScreen(),
     );
   }
 }

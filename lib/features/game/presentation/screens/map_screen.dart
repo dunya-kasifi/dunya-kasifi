@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../controllers/route_controller.dart';
 import '../../../mini_games/presentation/screens/cloud_painting_screen.dart';
 import '../../../mini_games/presentation/screens/weather_prediction_screen.dart';
+import '../../../mini_games/presentation/screens/sky_math_race_screen.dart';
 
 class MapScreen extends GetView<RouteController> {
   const MapScreen({super.key});
@@ -89,6 +90,8 @@ class MapScreen extends GetView<RouteController> {
                     Get.to(() => const CloudPaintingScreen());
                   } else if (point.miniGame.name.contains('Hava')) {
                     Get.to(() => const WeatherPredictionScreen());
+                  } else if (point.miniGame.name.contains('Matematik')) {
+                    Get.to(() => const SkyMathRaceScreen());
                   }
                 },
               ),
@@ -274,7 +277,7 @@ class MapScreen extends GetView<RouteController> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(point.imagePath),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                   shape: BoxShape.circle,
                 ),
@@ -362,18 +365,18 @@ class MapScreen extends GetView<RouteController> {
           ),
         ),
 
-        // Geri Butonu
-        Positioned(
-          top: MediaQuery.of(context).padding.top + 16,
-          left: 16,
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Get.back(),
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.white.withAlpha(25),
-            ),
-          ),
-        ),
+        // // Geri Butonu
+        // Positioned(
+        //   top: MediaQuery.of(context).padding.top + 16,
+        //   left: 16,
+        //   child: IconButton(
+        //     icon: const Icon(Icons.arrow_back, color: Colors.white),
+        //     onPressed: () => Get.back(),
+        //     style: IconButton.styleFrom(
+        //       backgroundColor: Colors.white.withAlpha(25),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

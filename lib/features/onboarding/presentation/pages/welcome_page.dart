@@ -107,27 +107,40 @@ class WelcomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Logo or Icon
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColor,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.textColor.withOpacity(0.2),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50),
                     ),
-                    child: Icon(
-                      Icons.explore,
-                      size: 60,
-                      color: AppColors.primaryColor,
+                    child: Image.asset(
+                      "assets/icons/app_icon.png",
+                      height: 200,
+                      width: 200,
+                      fit: BoxFit.cover,
                     ),
                   )
                       .animate()
                       .fadeIn(duration: const Duration(milliseconds: 600)),
+                  // Container(
+                  //   padding: const EdgeInsets.all(20),
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.backgroundColor,
+                  //     shape: BoxShape.circle,
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         color: AppColors.textColor.withOpacity(0.2),
+                  //         blurRadius: 20,
+                  //         offset: const Offset(0, 10),
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   child: Icon(
+                  //     Icons.explore,
+                  //     size: 60,
+                  //     color: AppColors.primaryColor,
+                  //   ),
+                  // )
+                  //     .animate()
+                  //     .fadeIn(duration: const Duration(milliseconds: 600)),
 
                   const SizedBox(height: 40),
 
