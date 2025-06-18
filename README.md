@@ -2,6 +2,10 @@
 
 Dünya Kaşifi, çocuklar için tasarlanmış eğitici ve eğlenceli bir mobil macera oyunudur. Bu oyun, çocukların dünyayı keşfetmelerini, yeni şeyler öğrenmelerini ve doğayı koruma bilincini geliştirmelerini sağlar.
 
+## Video Link
+
+https://youtu.be/0C4aFW_aM7U
+
 ## 🎮 Oyun Özellikleri
 
 ### 🌍 Keşif ve Öğrenme
