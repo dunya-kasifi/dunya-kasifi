@@ -4,7 +4,11 @@ Dünya Kaşifi, çocuklar için tasarlanmış eğitici ve eğlenceli bir mobil m
 
 ## Video Link
 
-https://youtu.be/0C4aFW_aM7U
+> https://youtu.be/0C4aFW_aM7U
+
+## Tanııtım Sitesi
+
+> https://dunya-kasifi.github.io/dunya-kasifi-web/#anasayfa
 
 ## 🎮 Oyun Özellikleri
 
